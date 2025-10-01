@@ -1,0 +1,20 @@
+2025-10-01 15:33:11,790 - WARNING - Postgres table 'rss_announcements' not found; DB inserts will be disabled. Set CREATE_RSS_TABLE=true to auto-create.
+2025-10-01 15:33:14,976 - ERROR - S3 ClientError while reading existing CSV (BSE)
+Traceback (most recent call last):
+  File "c:\PBL\rss_ingestor.py", line 396, in fetch_and_process
+    csv_obj = self.s3.get_object(Bucket=self.bucket, Key=raw_key)
+  File "C:\Users\yashw\AppData\Local\Programs\Python\Python313\Lib\site-packages\botocore\client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+           ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yashw\AppData\Local\Programs\Python\Python313\Lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\yashw\AppData\Local\Programs\Python\Python313\Lib\site-packages\botocore\client.py", line 1078, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.exceptions.ClientError: An error occurred (SignatureDoesNotMatch) when calling the GetObject operation: The request signature we calculated does not match the signature you provided. Check your key and signing method.
+2025-10-01 15:33:14,985 - ERROR - Error fetching BSE feed
+Traceback (most recent call last):
+  File "c:\PBL\rss_ingestor.py", line 438, in fetch_and_process
+    s3_location, status = self.upload_item_xml_to_s3(item_xml, company_name, uid, pdf_url=link)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'BseRssIngestor' object has no attribute 'upload_item_xml_to_s3'
+2025-10-01 15:34:54,288 - WARNING - Postgres table 'rss_announcements' not found; DB inserts will be disabled. Set CREATE_RSS_TABLE=true to auto-create.
